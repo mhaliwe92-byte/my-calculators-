@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+<title>توزيع مساحة الحاوية – 68 م³</title>
+<style>
+:root{font-family:system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;color:#18304a;background:#edf3f8;font-size:15px}*{box-sizing:border-box}body{margin:0;padding:14px 10px}.app{width:min(570px,100%);margin:auto;background:white;border-radius:18px;box-shadow:0 9px 30px #14375018;overflow:hidden}.top{padding:19px 17px 15px;background:#163957;color:white}.top h1{font-size:21px;line-height:1.3;margin:0 0 6px;font-weight:750}.top p{font-size:12px;opacity:.9;margin:0}.content{padding:14px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:11px}.stat{border-radius:12px;background:#f1f5fa;padding:10px 7px;text-align:center;min-width:0}.stat strong{display:block;font-size:23px;line-height:1.35;font-variant-numeric:tabular-nums}.stat small{font-size:11px;color:#496276;display:block}.stat.used{background:#ffe3e3;color:#b51f2c}.stat.used small{color:#9c3540}.stat.remain{background:#e7f5ef;color:#086245}.stat.over{background:#ffe6e6;color:#a32222}.capacity{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 3px 12px}.capacity label{font-weight:650;font-size:13px}.capacity input{width:80px}.track{height:9px;background:#e4ebf0;border-radius:15px;overflow:hidden;margin-bottom:14px}.fill{height:100%;width:0;background:#1d9b76;border-radius:15px;transition:width .2s}.head,.item{display:grid;grid-template-columns:24px minmax(0,1fr) 83px 83px;align-items:center;gap:8px}.head{background:#ebf1f7;border-radius:10px;padding:9px 8px;color:#395771;font-size:12px;font-weight:700}.item{padding:8px;border-bottom:1px solid #ebeff2}.no{color:#8c9aaa;font-size:12px;text-align:center}.name{font-size:13px;font-weight:600}.subnote{font-size:10px;color:#617c90;font-weight:400;display:block;margin-top:3px;line-height:1.3}.head span:nth-child(n+3){text-align:center}.item .cbm{font-size:14px;padding:9px 3px}.cbm{width:100%;border:1px solid #c9d6e1;border-radius:9px;padding:10px 8px;font-family:inherit;font-size:16px;font-weight:700;text-align:center;outline:none;color:#163957;background:#fff;font-variant-numeric:tabular-nums;direction:ltr}.cbm:focus{border-color:#1c8fa0;box-shadow:0 0 0 2px #1c8fa021}input[type='number']{appearance:textfield;-moz-appearance:textfield}input::-webkit-inner-spin-button,input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.tools{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}button{font:600 13px system-ui,Tahoma,sans-serif;border:0;border-radius:10px;padding:10px 12px;cursor:pointer}button.primary{background:#16446b;color:#fff}button.secondary{background:#eaf0f5;color:#214763}button.danger{background:#fff1f1;color:#aa3030}.note{padding:9px 4px 2px;color:#688092;font-size:11.5px;line-height:1.7}.row-new{display:flex;gap:6px;margin-top:10px}.row-new input{flex:1;min-width:0;font:inherit;border:1px solid #ced9e3;border-radius:10px;padding:10px}.row-new button{background:#dcefe9;color:#17674e}.remove{border:none;padding:2px 4px;background:transparent;color:#ba4b4b;font-size:15px}.name-wrap{display:flex;align-items:center;justify-content:space-between;gap:4px}.capacity input{padding:7px}.foot{text-align:center;color:#8292a0;font-size:10px;margin:10px 0 3px}@media(max-width:370px){.content{padding:11px}.head,.item{grid-template-columns:20px minmax(0,1fr) 68px 68px;gap:4px}.name{font-size:12.5px}.stat strong{font-size:20px}.cbm{padding:8px 3px}}
+</style>
+</head>
+<body><main class="app">
+<header class="top"><h1>📦 توزيع مساحة الحاوية</h1><p>كل رقم تضيفه ينخصم فوراً من المساحة المتبقية</p></header>
+<section class="content">
+<div class="capacity"><label for="capacity">سعة الحاوية الإجمالية (م³)</label><input id="capacity" class="cbm" type="number" min="0.01" step="any" inputmode="decimal" value="68"></div>
+<div class="stats">
+<div class="stat"><strong id="total">68</strong><small>إجمالي المساحة م³</small></div>
+<div class="stat used"><strong id="used">0</strong><small>الموزّع م³</small></div>
+<div class="stat remain" id="remainBox"><strong id="remain">68</strong><small id="remainLabel">المتبقي م³</small></div>
+</div>
+<div class="track"><div class="fill" id="fill"></div></div>
+<div class="head"><span>رقم</span><span>الصنف</span><span>المخصص م³</span><span>CBM الطرد</span></div>
+<div id="rows"></div>
+<form id="addForm" class="row-new"><input id="newName" placeholder="اسم صنف إضافي (اختياري)" aria-label="اسم الصنف الجديد"><button type="submit">+ إضافة</button></form>
+<div class="tools"><button type="button" class="secondary" id="example">تعبئة توزيع مقترح</button><button type="button" class="danger" id="clear">تصفير المساحات</button></div>
+<div class="note">✓ الأرقام بتتحفظ تلقائياً على نفس المتصفح والجهاز. &nbsp; ✓ اكتب مساحة الصنف وCBM الطرد، وبيظهر العدد التقريبي للطرود. &nbsp; ✓ الملف بيشتغل بدون إنترنت أو بروكسي.</div>
+<div class="foot">حاسبة مبدئية لحجم البضاعة، ولا تشمل حدود الوزن أو طريقة الرصّ.</div>
+</section></main>
+<script>
+(function(){
+'use strict';
+var STORE='container-space-68-v2',OLD_STORE='container-space-68-v1';
+var base=['عطر','ستانلي','سكوتر','فرو','ألعاب تمثيلية','ألعاب تريند','جزدان رجالي','حقيبة ألعاب','ماغات'];
+var suggested=[3,3,7,9,11,12,4,7,12];
+var state={capacity:68,items:base.map(function(n){return {name:n,cbm:0,cartonCbm:0}})};
+try{var saved=JSON.parse(localStorage.getItem(STORE)||localStorage.getItem(OLD_STORE));if(saved && Array.isArray(saved.items) && saved.items.length && saved.items.every(function(x){return typeof x.name==='string'})){state={capacity:Number(saved.capacity)||68,items:saved.items.map(function(x){return {name:({'حقائب ولادية':'حقيبة ألعاب','هدايا وماغات وغيرها':'ماغات'}[x.name]||x.name),cbm:Math.max(0,Number(x.cbm)||0),cartonCbm:Math.max(0,Number(x.cartonCbm)||0)}})}}}catch(e){}
+var $=function(id){return document.getElementById(id)};
+function format(n){return Number((Math.round(n*1000)/1000).toFixed(3)).toLocaleString('ar',{maximumFractionDigits:3})}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(state))}catch(e){}}
+function update(){var used=state.items.reduce(function(a,x){return a+(Number(x.cbm)||0)},0),remaining=state.capacity-used; $('total').textContent=format(state.capacity);$('used').textContent=format(used);$('remain').textContent=format(Math.abs(remaining));$('remainLabel').textContent=remaining< -0.000001?'تجاوزت السعة م³':'المتبقي م³';$('remainBox').className='stat '+(remaining< -0.000001?'over':'remain');$('fill').style.width=Math.min(100,(used/state.capacity)*100)+'%';$('fill').style.background=used>state.capacity?'#d44747':'#1d9b76';save()}
+function render(){var rows=$('rows');rows.innerHTML='';state.items.forEach(function(item,i){var row=document.createElement('div');row.className='item';var no=document.createElement('span');no.className='no';no.textContent=i+1;var wrap=document.createElement('div');wrap.className='name-wrap';var name=document.createElement('span');name.className='name';name.textContent=item.name;wrap.appendChild(name);var note=document.createElement('span');note.className='subnote';function updateCartons(){var area=Number(item.cbm)||0,unit=Number(item.cartonCbm)||0;note.textContent=unit>0?'≈ '+Math.floor((area+1e-9)/unit)+' طرد':'اكتب CBM الطرد';}var namebox=document.createElement('div');namebox.append(name,note);wrap.appendChild(namebox);updateCartons();if(i>=base.length){var del=document.createElement('button');del.type='button';del.className='remove';del.textContent='✕';del.setAttribute('aria-label','حذف '+item.name);del.onclick=function(){state.items.splice(i,1);render()};wrap.appendChild(del)}var input=document.createElement('input');input.className='cbm';input.type='number';input.min='0';input.step='any';input.inputMode='decimal';input.value=item.cbm||'';input.placeholder='0';input.setAttribute('aria-label','المتر المكعب لصنف '+item.name);input.addEventListener('input',function(){var n=Number(input.value);state.items[i].cbm=isFinite(n)?Math.max(0,n):0;updateCartons();update()});input.addEventListener('change',function(){if(Number(input.value)<0){input.value=0;state.items[i].cbm=0;update()}});var cartonInput=document.createElement('input');cartonInput.className='cbm';cartonInput.type='number';cartonInput.min='0';cartonInput.step='any';cartonInput.inputMode='decimal';cartonInput.value=item.cartonCbm||'';cartonInput.placeholder='0';cartonInput.setAttribute('aria-label','سي بي ام الطرد لصنف '+item.name);cartonInput.addEventListener('input',function(){var n=Number(cartonInput.value);state.items[i].cartonCbm=isFinite(n)?Math.max(0,n):0;updateCartons();update()});row.append(no,wrap,input,cartonInput);rows.appendChild(row)});update()}
+$('capacity').value=state.capacity;$('capacity').addEventListener('input',function(){var v=Number(this.value);if(v>0&&isFinite(v)){state.capacity=v;update()}});
+$('addForm').addEventListener('submit',function(e){e.preventDefault();var n=$('newName').value.trim();if(!n)return;state.items.push({name:n,cbm:0,cartonCbm:0});$('newName').value='';render()});
+$('example').addEventListener('click',function(){base.forEach(function(n,i){var target=state.items.find(function(x){return x.name===n});if(target)target.cbm=suggested[i]});render()});
+$('clear').addEventListener('click',function(){state.items.forEach(function(x){x.cbm=0});render()});render();
+})();
+</script>
+</body></html>
